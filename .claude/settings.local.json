@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(if \\(-not $?\\) { \"Directory is empty or does not exist\" })",
+      "mcp__ed84ff44-99fb-4846-8733-b78396c88efa__get_publishable_keys",
+      "mcp__ed84ff44-99fb-4846-8733-b78396c88efa__apply_migration",
+      "mcp__ed84ff44-99fb-4846-8733-b78396c88efa__execute_sql",
+      "Bash(firebase projects:list)",
+      "Bash(flutter build *)",
+      "mcp__ed84ff44-99fb-4846-8733-b78396c88efa__list_tables",
+      "Bash(firebase deploy *)",
+      "Bash(flutter analyze *)",
+      "mcp__claude_ai_Supabase__list_projects",
+      "mcp__claude_ai_Supabase__execute_sql",
+      "mcp__claude_ai_Supabase__apply_migration",
+      "Bash(flutter pub *)",
+      "Bash(flutter clean *)"
+    ]
+  }
+}
