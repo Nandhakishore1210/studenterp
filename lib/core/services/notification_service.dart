@@ -1,14 +1,13 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-// Uncomment after running: flutterfire configure
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-// @pragma('vm:entry-point')
-// Future<void> _onBackgroundMessage(RemoteMessage message) async {
-//   await Firebase.initializeApp();
-// }
+@pragma('vm:entry-point')
+Future<void> _onBackgroundMessage(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
 
 final _local = FlutterLocalNotificationsPlugin();
 
@@ -20,17 +19,16 @@ class NotificationService {
       const InitializationSettings(android: android, iOS: ios),
     );
 
-    // FCM — uncomment after flutterfire configure:
-    // final fcm = FirebaseMessaging.instance;
-    // await fcm.requestPermission(alert: true, badge: true, sound: true);
-    // FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
-    // FirebaseMessaging.onMessage.listen((msg) {
-    //   final n = msg.notification;
-    //   if (n != null) showLocal(title: n.title ?? 'Student+', body: n.body ?? '');
-    // });
-    // final token = await fcm.getToken();
-    // if (token != null) await _saveToken(token);
-    // fcm.onTokenRefresh.listen(_saveToken);
+    final fcm = FirebaseMessaging.instance;
+    await fcm.requestPermission(alert: true, badge: true, sound: true);
+    FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
+    FirebaseMessaging.onMessage.listen((msg) {
+      final n = msg.notification;
+      if (n != null) showLocal(title: n.title ?? 'Student+', body: n.body ?? '');
+    });
+    final token = await fcm.getToken();
+    if (token != null) await _saveToken(token);
+    fcm.onTokenRefresh.listen(_saveToken);
   }
 
   static Future<void> _saveToken(String token) async {
